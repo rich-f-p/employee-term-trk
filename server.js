@@ -28,4 +28,15 @@ function getDepartment(){
         }
     )
 };
-
+// function to view roles and their correlating department
+function viewRoles(){
+    const roles = `SELECT * FROM role JOIN department ON role.department_id=department.id;`;
+    my.query(roles,
+        function(err,results,fields){
+            if(err){
+                cl(err);              
+            }
+            console.table(results);
+        }
+    )
+};
