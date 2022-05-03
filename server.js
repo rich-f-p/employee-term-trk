@@ -40,3 +40,19 @@ function viewRoles(){
         }
     )
 };
+// function that will allow the user to add a department to the department table.
+//passes a string through the function
+function addDepartment(dep){
+    const add = `INSERT INTO department (dep_name) VALUES ('${dep}');`;
+    my.query(add,
+        function(err,results,fields){
+            if(err){
+                cl(err);              
+            }
+            console.table(results);
+        }
+    )
+};
+
+//test();
+// viewEmployee();
