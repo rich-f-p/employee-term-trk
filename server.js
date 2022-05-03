@@ -58,3 +58,37 @@ async function addDepartment(){
     init();
 };
 
+
+function checkChoice(ac){
+    switch (ac){
+        case 'add employee':
+            console.log('addemp');
+            break;
+        case 'view all employees':
+            //viewEmployees();
+            break;
+        case 'update employee role':
+            //update role
+            break;
+        case 'view all departments':
+            getDepartment();
+            break;
+        case 'view all roles':
+            viewRoles();
+            break;
+        case 'add department':
+            addDepartment();
+            break;
+        case 'add role':
+            //add roel
+            break;
+    }
+
+}
+
+function init(){
+    inquire.prompt(menu).then((data)=>{
+        checkChoice(data.menu)
+    })
+}
+init();
