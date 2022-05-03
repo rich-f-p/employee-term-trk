@@ -71,6 +71,45 @@ function viewEmployees(){
     )
 }
 
+async function getDep(tag){
+    my.query(`SELECT * FROM department;`,
+    function(err,results,fields){
+        if(err){
+            //cl(err)
+        }else{
+    //const id = results.filter(data => data.dep_name === tag)[0].id;
+    //cl(id[0].id)
+    return id ;
+    }
+})}
+/**
+ * add function to allow the user to add a new role to the database
+ * @param {string} title 
+ * @param {string} salary 
+ * @param {string} department 
+ */
+async function addRole(){
+    const role = await askrole();
+    //const get = await getDep(role.roleDep);
+    cl(role)
+    //cl(get);
+    my.query(`INSERT INTO role (title, salary, department_id) VALUES ('${role.roleName}',${role.roleSalary},NULL);`,
+        function(err,results,fields){
+            if(err){
+                cl(err);              
+            }
+        }
+    )
+}
+// let hi = getDep('legal')
+ //addRole('legal','dep','100');
+
+//test();
+// viewEmployee();
+
+
+
+
 function checkChoice(ac){
     switch (ac){
         case 'add employee':
@@ -91,8 +130,8 @@ function checkChoice(ac){
         case 'add department':
             addDepartment();
             break;
-        case 'add role':
-            //add roel
+        case 'add a role':
+            addRole();
             break;
     }
 

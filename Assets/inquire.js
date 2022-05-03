@@ -66,15 +66,18 @@ const qa = [{
     choices: choices
 }];
 // starts the questions for creating a new role.
-function askrole(){
+async function askrole(){
     qaRole();
-    inquire.prompt(qa).then((data) =>{
+    var newrole = [];
+    await inquire.prompt(qa).then((data) =>{
+        newrole = data;
         console.log('Role has been added')
     }).catch((error) => {
         if(error){
             console.log(error)
         }
-    })
+    });
+    return newrole;
 }
 //variable that will be used when the user wants to input new employee data
 var roleChoicesA = [];
