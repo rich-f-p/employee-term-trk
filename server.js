@@ -58,6 +58,18 @@ async function addDepartment(){
     init();
 };
 
+function viewEmployees(){
+    const view = `SELECT * FROM employee JOIN role ON employee.role_id=role.id JOIN department ON role.department_id=department.id;`
+    my.query(view,
+        function(err,results,fields){
+            if(err){
+                cl(err);              
+            }
+            console.table(results);
+            init();
+        }
+    )
+}
 
 function checkChoice(ac){
     switch (ac){
@@ -65,7 +77,7 @@ function checkChoice(ac){
             console.log('addemp');
             break;
         case 'view all employees':
-            //viewEmployees();
+            viewEmployees();
             break;
         case 'update employee role':
             //update role
