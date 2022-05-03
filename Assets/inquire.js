@@ -47,13 +47,14 @@ const qa = [{
     choices: choices
 }];
 
-// function askrole(){
-//     qaRole();
-//     inquire.prompt(qa).then((data) =>{
-//         console.log(data)
-//     })
-// }
-// askrole();
+function askrole(){
+    qaRole();
+    inquire.prompt(qa).then((data) =>{
+        console.log(data)
+    })
+}
+
+
 // inquire.prompt(qaRole).then((data) =>{
 //     console.log(data);
 // }).catch((error) =>{
@@ -65,4 +66,4 @@ const qa = [{
 // });
 
 
-module.exports = {menu,qaRole}
+module.exports = {menu,askrole}
