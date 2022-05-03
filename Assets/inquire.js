@@ -50,7 +50,11 @@ const qa = [{
 function askrole(){
     qaRole();
     inquire.prompt(qa).then((data) =>{
-        console.log(data)
+        console.log('Role has been added')
+    }).catch((error) => {
+        if(error){
+            console.log(error)
+        }
     })
 }
 //variable that will be used when the user wants to input new employee data
@@ -111,7 +115,11 @@ function inQaEmp(){
     empQaMan();
     empQaRole();
     inquire.prompt(qaEmployee).then((data) =>{
-        console.log(data)
+        console.log('Employee has been added')
+    }).catch((error) => {
+        if(error){
+            console.log(error)
+        }
     })
 }
 //array of employee names
@@ -152,7 +160,11 @@ async function updateEmp(){
     await popUpRole();
     await empQaRole();
     inquire.prompt(updateQa).then((data) =>{
-        console.log(data)
+        console.log('Employee role has been updated')
+    }).catch((error) => {
+        if(error){
+            console.log(error)
+        }
     })
 }
 
