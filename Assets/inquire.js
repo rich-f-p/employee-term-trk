@@ -23,14 +23,16 @@ const addDepartment =[{
     message:'what is the name of the department you would like to add?',
     name: 'addDepartment'
 }]
-function qaAddDep(){
-    inquire.prompt(addDepartment).then((data) =>{
-        console.log('Department has been added')
+async function qaAddDep(){
+    var newdata = [];
+    await inquire.prompt(addDepartment).then((data) =>{
+        console.log('Department has been added');
+        newdata = data;
     }).catch((error) => {
         if(error){
             console.log(error)
         }
-    })
+    });return newdata;
 }
 
 // add function to populate the choices available in the qa list
