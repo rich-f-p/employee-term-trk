@@ -53,6 +53,26 @@ function addDepartment(dep){
         }
     )
 };
+/**
+ * add function to allow the user to add a new role to the database
+ * @param {string} title 
+ * @param {string} salary 
+ * @param {string} department 
+ */
+function addRole(title,salary,department){
+    const newDep = getDep(department);
+    const add = `INSERT INTO role (title, salary, department_id) VALUES ('${title}',${salary},${newDep});`
+    my.query(add,
+        function(err,results,fields){
+            if(err){
+                cl(err);              
+            }
+            console.table(results);
+        }
+    )
+}
+
+
 
 //test();
 // viewEmployee();
