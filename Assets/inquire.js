@@ -4,6 +4,7 @@ const db = dbSql.createConnection(
     {
         host: 'localhost',
         user: 'root',
+        //password may vary depending on the user
         password: 'password123',
         database: 'emply_db'
     }
@@ -16,6 +17,22 @@ const menu = [{
     choices: ['view all employees','add employee','update employee role','view all departments',
     'view all roles','add department','add a role']
 }];
+
+const addDepartment =[{
+    type:'input',
+    message:'what is the name of the department you would like to add?',
+    name: 'addDepartment'
+}]
+function qaAddDep(){
+    inquire.prompt(addDepartment).then((data) =>{
+        console.log('Department has been added')
+    }).catch((error) => {
+        if(error){
+            console.log(error)
+        }
+    })
+}
+
 // add function to populate the choices available in the qa list
 choices =[];
 function qaRole(){
@@ -168,4 +185,4 @@ async function updateEmp(){
     })
 }
 
-module.exports = {menu,askrole,inQaEmp,updateEmp}
+module.exports = {menu,askrole,inQaEmp,updateEmp,qaAddDep}
