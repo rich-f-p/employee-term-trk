@@ -114,17 +114,46 @@ function inQaEmp(){
         console.log(data)
     })
 }
+//array of employee names
+var availEmp =[];
+//selects all of the employee names
+function popUpRole(){
+    db.query(`SELECT concat(first_name,' ',last_name) as Name FROM employee;`,
+    function(err,results,fields){
+        if(err){
+            console.log(err);
+        }else{
+            // push data to array
+            for(i=0;i<results.length;i++){
+                availEmp.push(results[i].Name);
+            }
+        }
+    })
+}
+//questions to update employee role
+const updateQa =[{
+    type:'input',
+    message:'please press the enter key',
+    name: 'hold'
 
+},{
+    type:'list',
+    message: 'Which employee role do you want to update?',
+    name: 'updateEmp',
+    choices: availEmp
+},{
+    type:'list',
+    message: 'Which role would you like to assign to the employee?',
+    name: 'updatedRole',
+    choices: roleChoicesA
+}]
+// function to initiate the process of updating an employee role
+async function updateEmp(){
+    await popUpRole();
+    await empQaRole();
+    inquire.prompt(updateQa).then((data) =>{
+        console.log(data)
+    })
+}
 
-// inquire.prompt(qaRole).then((data) =>{
-//     console.log(data);
-// }).catch((error) =>{
-//     if(error){
-//         console.log(error);
-//     }else{
-//         console.log('start');
-//     }
-// });
-
-
-module.exports = {menu,askrole,inQaEmp}
+module.exports = {menu,askrole,inQaEmp,updateEmp}
