@@ -1,7 +1,7 @@
 const ct = require('console.table');
 const inquire = require('inquirer');
 const mySql = require('mysql2');
-const {menu,askrole,inQaEmp,updateEmp,qaAddDep} = require('./Assets/inquire')
+const {menu,askrole,updateEmp,qaAddDep,empQaMan,empQaRole,qaEmployee} = require('./Assets/inquire')
 
 // function for console.log
 function cl(log){
@@ -91,16 +91,41 @@ askrole().then((data)=>{
             if(err){
                 cl(err);              
             }init();
-        }
-)
-    }
-}
-})})}
+})}}})})}
+// Function that will initiate when the user wants to add employee
+function inQaEmp(){
+    //populate array of choices
+    empQaMan();
+    empQaRole();
+    inquire.prompt(qaEmployee).then((data) =>{
+        my.query(`SELECT * FROM role;`,
+        function(err,results){
+            if(err){cl(err);}else{
+                for(i=0;i<results.length;i++){
+                    var role;
+                if(results[i].title===data.roleEmp){
+                    //set variable role to id number of correlating role answer
+                    role = results[i].id;
+                }}}
+        my.query(`SELECT id,concat(first_name,' ',last_name) as Name FROM employee;`,
+        function(err,empresults){
+            if(err){cl(err);}else{
+            for(i=0;i<empresults.length;i++){
+                var manager;
+                if(empresults[i].Name === data.managerEmp){
+                    //set variable role to id number of correlating manager answer
+                    manager = empresults[i].id
+my.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${data.firstEmp}','${data.lastEmp}',${role},${manager});`)
+    }}}})})
+    console.log('Employee has been added')
+    //start menu function
+    init();
+}).catch((error) => {if(error){console.log(error)}})}
 
 function checkChoice(ac){
     switch (ac){
         case 'add employee':
-            console.log('addemp');
+            inQaEmp();
             break;
         case 'view all employees':
             viewEmployees();

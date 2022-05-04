@@ -132,18 +132,7 @@ const qaEmployee = [{
     name: 'managerEmp',
     choices: manChoices
 }]
-// function to initiate the process of inputting new employee information
-function inQaEmp(){
-    empQaMan();
-    empQaRole();
-    inquire.prompt(qaEmployee).then((data) =>{
-        console.log('Employee has been added')
-    }).catch((error) => {
-        if(error){
-            console.log(error)
-        }
-    })
-}
+
 //array of employee names
 var availEmp =[];
 //selects all of the employee names
@@ -190,4 +179,4 @@ async function updateEmp(){
     })
 }
 
-module.exports = {menu,askrole,inQaEmp,updateEmp,qaAddDep}
+module.exports = {menu,askrole,updateEmp,qaAddDep,empQaMan,empQaRole,qaEmployee}
