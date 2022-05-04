@@ -19,7 +19,7 @@ const my = mySql.createConnection(
 
 //function that will return all saved departments in the database
 function getDepartment(){
-    const department = `SELECT * FROM department;`
+    const department = `SELECT id,dep_name AS Department FROM department;`
     my.query(department,
         function(err,results,fields){
             if(err){
