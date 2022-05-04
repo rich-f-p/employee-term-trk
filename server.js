@@ -77,9 +77,9 @@ function viewEmployees(){
  * @param {string} salary 
  * @param {string} department 
  */
-async function addRole(){
-    await askrole().then((data)=>{
-        my.query(`SELECT * FROM department;`,
+function addRole(){
+askrole().then((data)=>{
+    my.query(`SELECT * FROM department;`,
     function(err,results,fields){
         if(err){
         }
@@ -96,14 +96,6 @@ async function addRole(){
     }
 }
 })})}
-// let hi = getDep('legal')
- //addRole('legal','dep','100');
-
-//test();
-// viewEmployee();
-
-
-
 
 function checkChoice(ac){
     switch (ac){
