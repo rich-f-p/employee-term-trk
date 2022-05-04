@@ -1,7 +1,7 @@
 const ct = require('console.table');
 const inquire = require('inquirer');
 const mySql = require('mysql2');
-const {menu,askrole,updateEmp,qaAddDep,empQaMan,empQaRole,qaEmployee} = require('./Assets/inquire')
+const {menu,askrole,qaAddDep,empQaMan,empQaRole,qaEmployee,popUpRole,updateQa} = require('./Assets/inquire')
 
 // function for console.log
 function cl(log){
@@ -122,6 +122,39 @@ my.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALU
     init();
 }).catch((error) => {if(error){console.log(error)}})}
 
+function updateEmp(){
+    popUpRole();
+    empQaRole();
+    inquire.prompt(updateQa).then((data) =>{
+        console.log(data)
+        my.query(`SELECT * FROM role;`,
+        function(err,results){
+            if(err){cl(err);}else{
+                for(i=0;i<results.length;i++){
+                    var roleId;
+                if(results[i].title===data.updatedRole){
+                    //set variable role to id number of correlating role answer
+                    roleId = results[i].id;
+                }}}
+        my.query(`SELECT id,concat(first_name,' ',last_name) as Name FROM employee;`,
+        function(err,empresults){
+            if(err){cl(err);}else{
+            for(i=0;i<empresults.length;i++){
+                var nameId;
+                if(empresults[i].Name === data.updateEmp){
+                    //set variable role to id number of correlating manager answer
+                    nameId = empresults[i].id
+my.query(`UPDATE employee SET role_id='${roleId}'  WHERE id = '${nameId}';`)
+    }}}})})
+    console.log('Employee role has been updated')
+    init();
+    }).catch((error) => {
+        if(error){
+            console.log(error)
+        }
+    })
+}
+
 function checkChoice(ac){
     switch (ac){
         case 'add employee':
@@ -131,7 +164,7 @@ function checkChoice(ac){
             viewEmployees();
             break;
         case 'update employee role':
-            //update role
+            updateEmp();
             break;
         case 'view all departments':
             getDepartment();

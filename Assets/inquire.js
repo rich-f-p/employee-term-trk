@@ -146,7 +146,9 @@ function popUpRole(){
         }else{
             // push data to array
             for(i=0;i<results.length;i++){
+                if(availEmp.indexOf(results[i].name)===-1){
                 availEmp.push(results[i].Name);
+                }
             }
         }
     })
@@ -156,7 +158,6 @@ const updateQa =[{
     type:'input',
     message:'please press the enter key',
     name: 'hold'
-
 },{
     type:'list',
     message: 'Which employee role do you want to update?',
@@ -169,16 +170,5 @@ const updateQa =[{
     choices: roleChoicesA
 }]
 // function to initiate the process of updating an employee role
-async function updateEmp(){
-    await popUpRole();
-    await empQaRole();
-    inquire.prompt(updateQa).then((data) =>{
-        console.log('Employee role has been updated')
-    }).catch((error) => {
-        if(error){
-            console.log(error)
-        }
-    })
-}
 
-module.exports = {menu,askrole,updateEmp,qaAddDep,empQaMan,empQaRole,qaEmployee}
+module.exports = {menu,askrole,qaAddDep,empQaMan,empQaRole,qaEmployee,popUpRole,updateQa}
