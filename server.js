@@ -71,17 +71,6 @@ function viewEmployees(){
     )
 }
 
-async function getDep(tag){
-    my.query(`SELECT * FROM department;`,
-    function(err,results,fields){
-        if(err){
-            //cl(err)
-        }else{
-    //const id = results.filter(data => data.dep_name === tag)[0].id;
-    //cl(id[0].id)
-    return id ;
-    }
-})}
 /**
  * add function to allow the user to add a new role to the database
  * @param {string} title 
@@ -89,18 +78,24 @@ async function getDep(tag){
  * @param {string} department 
  */
 async function addRole(){
-    const role = await askrole();
-    //const get = await getDep(role.roleDep);
-    cl(role)
-    //cl(get);
-    my.query(`INSERT INTO role (title, salary, department_id) VALUES ('${role.roleName}',${role.roleSalary},NULL);`,
+    await askrole().then((data)=>{
+        my.query(`SELECT * FROM department;`,
+    function(err,results,fields){
+        if(err){
+        }
+    for(i=0;i<results.length;i++){
+        if(results[i].dep_name===data.roleDep){
+            var dep = results[i].id;
+            my.query(`INSERT INTO role (title, salary, department_id) VALUES ('${data.roleName}',${data.roleSalary},${dep});`,
         function(err,results,fields){
             if(err){
                 cl(err);              
-            }
+            }init();
         }
-    )
+)
+    }
 }
+})})}
 // let hi = getDep('legal')
  //addRole('legal','dep','100');
 
