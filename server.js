@@ -32,7 +32,7 @@ function getDepartment(){
 };
 // function to view roles and their correlating department
 function viewRoles(){
-    const roles = `SELECT * FROM role JOIN department ON role.department_id=department.id;`;
+    const roles = `SELECT role.id AS ID,role.title AS Title,role.salary As Salary,department.dep_name As Department FROM role JOIN department ON role.department_id=department.id;`;
     my.query(roles,
         function(err,results,fields){
             if(err){
