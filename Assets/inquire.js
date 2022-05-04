@@ -89,11 +89,11 @@ function(err,results,fields){
     if(err){
         console.log(err);
     }else{
-
         for(i=0;i<results.length;i++){
+            if(roleChoicesA.indexOf(results[i].title)===-1) {
             roleChoicesA.push(results[i].title);
         }
-    }
+    }}
 })
 };
 
@@ -107,7 +107,9 @@ function empQaMan(){
         }else{
             // push data to array
             for(i=0;i<results.length;i++){
+                if(manChoices.indexOf(results[i].Name)===-1){
                 manChoices.push(results[i].Name);
+                }
             }
         }
     })
