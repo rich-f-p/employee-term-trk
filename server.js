@@ -178,6 +178,9 @@ function checkChoice(ac){
         case 'add a role':
             addRole();
             break;
+        case 'quit':
+            cl('press Ctrl+c')
+            break;
     }
 
 }
