@@ -59,7 +59,7 @@ async function addDepartment(){
 };
 
 function viewEmployees(){
-    const view = `SELECT * FROM employee JOIN role ON employee.role_id=role.id JOIN department ON role.department_id=department.id;`
+    const view = `SELECT employee.id,concat(first_name,' ',last_name) AS Name ,role.title AS Title,role.salary AS Salary,department.dep_name AS Department FROM employee JOIN role ON employee.role_id=role.id JOIN department ON role.department_id=department.id ORDER BY employee.id;`
     my.query(view,
         function(err,results,fields){
             if(err){
